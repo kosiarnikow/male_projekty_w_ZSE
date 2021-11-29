@@ -35,7 +35,7 @@ struct klasa
     }
     int leczenie(){
         cout << "\numiejetnosc:  leczenie" << endl;
-        return HP * 450;
+        return HP + 450;
     }
 };
 klasa mag = {
@@ -136,15 +136,15 @@ struct opponents{
     }
     int przetupanie(){
         cout << "atak przeciwnika: przetupanie" << endl;
-        return SPEED * 4;
+        return SPEED * 2.5;
     }
     int proba_kryta(){
         cout << "atak przeciwnika:  proba_kryta" << endl;
-        return RANGE * 3;
+        return RANGE * 1.5;
     }
     int leczenie(){
         cout << "umiejetnosc przeciwnika: leczenie" << endl;
-        return HP * 450;
+        return HP + 450;
     }
 };
 opponents jablko_Czesio = {
@@ -175,7 +175,7 @@ opponents gruszka_Waldemar = {
 810,
 810,
 90,
-450,
+4500,
 450,
 45,
 };
@@ -289,16 +289,16 @@ string random_enemy() {
 
 //funkcje 
 void menu(){
-cout << "\n \n WARZYWA FIGHTER - menu\n wybierz opcje 1 - gra, 2 - zasady, 3 - autor\n";
+cout << "\n WARZYWA FIGHTER - menu\n wybierz opcje 1 - gra, 2 - zasady, 3 - autor\n";
 int wybor1 = 0;
 cin >> wybor1;
 switch (wybor1)
 {
     case 1:
-        cout << "\nwitamy w wariatkowie\n"; Sleep(1000);
+        cout << "\nwitam\n"; Sleep(1000);
         break;
     case 2:
-        cout << "\n tutaj beda zasady\n"; Sleep(1000);
+        cout << "\nGracz ma na samym poczatku do wybrania klase jaka chcialby grac \nGra polega na walczeniu z losowymi przeciwnikami, ktorzy maja losowe interakcje\nTy zarowno jak i przeciwnik masz ich do wyboru az 5\nKazda z postaci posiada inne statystyki\nDodatkowo po kazdym ruchu przeciwnika jest pokazana ilosc ruchow ktora udalo sie tobie przetrwac\n \nTo tyle. Powidzenia wojowniku\n"; Sleep(1000);
         return menu();
         break;
     case 3:
@@ -370,7 +370,7 @@ void hero_movement(){
             choice_style_hero_fighter = hero.proba_kryta();
             break;        
         case 5:
-            choice_style_hero_fighter = hero.leczenie();
+           hero.HP = hero.leczenie();
             break;
         default:
         cout << "\n sprobuj jeszcze raz\n"; Sleep(1000);
@@ -396,7 +396,7 @@ void enemy_movement(){
             choice_style_enemy_fighter = enemy.proba_kryta();
             break;        
         case 5:
-            choice_style_enemy_fighter = enemy.leczenie();
+            enemy.HP = enemy.leczenie();
             break;
         default:
         cout << "\n sprobuj jeszcze raz\n"; Sleep(1000);
@@ -404,26 +404,28 @@ void enemy_movement(){
     }
 }
 void gameplay(){
-random_name_enemy = random_enemy();
-    cout << "wylosowany przeciwnik: "; Sleep(1000); cout << random_name_enemy << endl;
+        random_name_enemy = random_enemy();
+        cout << "wylosowany przeciwnik: "; Sleep(1000); cout << random_name_enemy << endl;
     do {
         hero_movement();
         enemy.HP -= choice_style_hero_fighter;
         cout << "zadajesz tyle obrazen: " << choice_style_hero_fighter;
-        cout << "\n zdrowie przeciwnika:" << enemy.HP << endl << endl; Sleep(1000);
+        cout << "\nzdrowie przeciwnika:" << enemy.HP << endl << endl; Sleep(1000);
         enemy_movement();
         hero.HP -= choice_style_enemy_fighter;
         cout << "przeciwnik zadaje tobie tyle obrazen: " << choice_style_enemy_fighter << endl;
         cout << "zdrowie gracza: " << hero.HP << endl << endl;  
         if (enemy.HP  <= 0){
-            cout << "brawo wygrales, jestes miszczu. Potrzebujemy cie w naszym skladzie";
+            cout << "brawo wygrales, jestes miszczu. Potrzebujemy cie w naszym skladzie \n \n";
+            random_name_enemy = random_enemy();
+            cout << "wylosowany przeciwnik: "; Sleep(1000); cout << random_name_enemy << endl;
         }
         if (hero.HP <= 0){
             cout << "HA HA HA, przegrales, sprobuj jeszcze raz kiedys";
         }
         win_games += 1;
-        cout << "\nilosc zrobionych ruchow: " << win_games;
-    } while (enemy.HP > 0 && hero.HP > 0);
+        cout << "\nilosc zrobionych ruchow: " << win_games << endl << endl;
+    } while (hero.HP > 0);
 }
 
 //sama gra

@@ -126,24 +126,24 @@ struct opponents{
     int HP;
     int SPEED;
     int RANGE;
-    int tornado(){
-        cout << "atak przeciwnika: tornado" << endl;
+    int gnicie(){
+        cout << "atak przeciwnika: gnicie" << endl;
         return AD * 1;
     }
-    int ziuf_ziuf(){
-        cout << "atak przeciwnika: ziuf_ziuf" << endl;
+    int pluf(){
+        cout << "atak przeciwnika: pluf" << endl;
         return AP * 2;
     }
-    int przetupanie(){
-        cout << "atak przeciwnika: przetupanie" << endl;
+    int warzywna_breja(){
+        cout << "atak przeciwnika: warzywna_breja" << endl;
         return SPEED * 2.5;
     }
-    int proba_kryta(){
-        cout << "atak przeciwnika:  proba_kryta" << endl;
+    int babciny_gulasz(){
+        cout << "atak przeciwnika: babciny_gulasz" << endl;
         return RANGE * 1.5;
     }
-    int leczenie(){
-        cout << "umiejetnosc przeciwnika: leczenie" << endl;
+    int hibernacja(){
+        cout << "umiejetnosc przeciwnika: hibernacja" << endl;
         return HP + 450;
     }
 };
@@ -383,20 +383,20 @@ void enemy_movement(){
     random_style_enemy_fighter = random_enemy_attack2();
     switch (random_style_enemy_fighter){
         case 1:
-            choice_style_enemy_fighter = enemy.tornado();
+            choice_style_enemy_fighter = enemy.gnicie();
             cout << choice_style_hero_fighter;
             break;
         case 2:
-            choice_style_enemy_fighter = enemy.ziuf_ziuf();
+            choice_style_enemy_fighter = enemy.pluf();
             break;
         case 3:
-            choice_style_enemy_fighter = enemy.przetupanie();
+            choice_style_enemy_fighter = enemy.warzywna_breja();
             break;
         case 4:
-            choice_style_enemy_fighter = enemy.proba_kryta();
+            choice_style_enemy_fighter = enemy.babciny_gulasz();
             break;        
         case 5:
-            enemy.HP = enemy.leczenie();
+            enemy.HP = enemy.hibernacja();
             break;
         default:
         cout << "\n sprobuj jeszcze raz\n"; Sleep(1000);

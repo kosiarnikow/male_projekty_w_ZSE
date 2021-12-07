@@ -5,7 +5,7 @@
 #include <time.h>
 
 using namespace std;
-int movement_hero, movement_enemy, name_enemy_attack, random_choice_enemy, style_hero_fighter, choice_style_hero_fighter, random_style_enemy_fighter, choice_style_enemy_fighter, win_games;
+int movement_hero, movement_enemy, name_enemy_attack, random_choice_enemy, style_hero_fighter, choice_style_hero_fighter, random_style_enemy_fighter, choice_style_enemy_fighter, tour, win;
 string random_name_enemy;
 
 // struktura
@@ -66,7 +66,7 @@ klasa kamikadze = {
 900,
 900,
 100,
-500,
+1400,
 500,
 50, 
 };
@@ -106,8 +106,8 @@ klasa goniec = {
 150,
 200,
 100,
-300,
 2000,
+700,
 400,  
 };
 klasa elf = {
@@ -298,7 +298,7 @@ switch (wybor1)
         cout << "\nwitam\n"; Sleep(1000);
         break;
     case 2:
-        cout << "\nGracz ma na samym poczatku do wybrania klase jaka chcialby grac \nGra polega na walczeniu z losowymi przeciwnikami, ktorzy maja losowe interakcje\nTy zarowno jak i przeciwnik masz ich do wyboru az 5\nKazda z postaci posiada inne statystyki\nDodatkowo po kazdym ruchu przeciwnika jest pokazana ilosc ruchow ktora udalo sie tobie przetrwac\n \nTo tyle. Powidzenia wojowniku\n"; Sleep(1000);
+        cout << "\nGracz ma na samym poczatku do wybrania klase jaka chcialby grac \nGra polega na walczeniu z losowymi przeciwnikami, ktorzy maja losowe interakcje\nTy zarowno jak i przeciwnik masz ich do wyboru az 5\nKazda z postaci posiada inne statystyki\nDodatkowo po kazdym ruchu przeciwnika jest pokazana ilosc ruchow ktora udalo sie tobie przetrwac\nna koncu kazdej gry pokazanajest ilosc wygranych gier\n \nTo tyle. Powidzenia wojowniku\n"; Sleep(1000);
         return menu();
         break;
     case 3:
@@ -415,16 +415,18 @@ void gameplay(){
         hero.HP -= choice_style_enemy_fighter;
         cout << "przeciwnik zadaje tobie tyle obrazen: " << choice_style_enemy_fighter << endl;
         cout << "zdrowie gracza: " << hero.HP << endl << endl;  
-        if (enemy.HP  <= 0){
+        if (enemy.HP  <= 0 && hero. HP > 0){
             cout << "brawo wygrales, jestes miszczu. Potrzebujemy cie w naszym skladzie \n \n";
+            win += 1;
             random_name_enemy = random_enemy();
             cout << "wylosowany przeciwnik: "; Sleep(1000); cout << random_name_enemy << endl;
         }
         if (hero.HP <= 0){
             cout << "HA HA HA, przegrales, sprobuj jeszcze raz kiedys";
+            cout << "\n \n \nilosc wygranych gier: " << win << endl << endl;
         }
-        win_games += 1;
-        cout << "\nilosc zrobionych ruchow: " << win_games << endl << endl;
+        tour += 1;
+        cout << "\nilosc zrobionych ruchow: " << tour << endl << endl;
     } while (hero.HP > 0);
 }
 
@@ -433,4 +435,6 @@ int main(){
     menu();
     character_select();
     gameplay();
+    system( "PAUSE" );
+    return 0;
 }

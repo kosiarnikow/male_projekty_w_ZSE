@@ -1,1 +1,1 @@
-# GIERKI-Cpp
+male projekty w ZSE
